@@ -2,11 +2,10 @@
 
 from players import Player
 from questions import Questions, Options
-from prizes import Prize
 from database import Database as DB
 import time
 
-prizes = Prize().create_list()
+prizes = [100,200,400,800,1600]
 
 def start_game(prizes):
     questions = Questions()
@@ -18,8 +17,6 @@ def start_game(prizes):
         
         options.get_options(questions.round_question)
 
-        # Give some time to read and make it look cool
-        time.sleep(10)
         while True:
             options.show_options()
             player_answer = input('Enter your answer: ')
@@ -29,13 +26,9 @@ def start_game(prizes):
             else:
                 break
         
-        if player_answer==questions.round_question:
+        if player_answer==questions.round_question[-1]:
             # If correct, collect prize and continue with next rank.
             pass
-
-
-def check_player():
-    pass
 
 
 if __name__ == '__main__':
