@@ -1,35 +1,69 @@
 # Main file for Questions and Answer Contest
 
-from players import Player
-from questions import Questions, Options
-from database import Database as DB
+from models.players import Player
+from models.questions import Question
+from models.base_model import BaseModel as DB
+from models.options import Options
 import time
 
 prizes = [100,200,400,800,1600]
 
 def start_game(prizes):
-    questions = Questions()
-    options = Options()
+    questions = Question('contest.db')
+    options = Options('contest.db')
     
-    for round in [1,2,3,4,5]:
-        questions.get_questions('contest.db',round)
+    for category in range(1,6):
+        questions.get_questions(category)
         questions.show_random_question()
-        
-        options.get_options(questions.round_question)
+        options.get_options(questions.pass_id())
 
         while True:
             options.show_options()
             player_answer = input('Enter your answer: ')
 
-            if player_answer not in ['A','B','C','D']:
+            if player_answer not in ['A','B','C','D','']:
                 print('\nSelect a valid option.')
             else:
                 break
         
-        if player_answer==questions.round_question[-1]:
-            # If correct, collect prize and continue with next rank.
-            pass
+        'CONSIDER THE ROUND OBJECT TO HANDLE THE ANSWER SITUATIONS'
+        if player_answer == '':
+            desist(category,prizes)
+            break
+        elif options.check_answer(player_answer):
+            award(category,prizes)
+            continue
+        else:
+            endgame(category)
+            break
+    completed(prizes)
 
+def desist(category,prizes):
+    if category < 2:
+        return
+    current_player._set_prize(prizes[category-2])
+    current_player._set_rank(category-1)
+    current_player.save_stats()
+    print('Exiting game.')
+
+
+def award(category,prizes):
+    current_player._set_prize(prizes[category-1])
+    current_player._set_rank(category)
+    print('Correct!')
+
+
+def endgame(category):
+    current_player._set_prize(0)
+    current_player._set_rank(category-1)
+    current_player.save_stats()
+    print('Wrong answer. Game Over.')
+
+def completed(prizes):
+    current_player._set_prize(prizes(4))
+    current_player._set_rank(5)
+    current_player.save_stats()
+    print('Congratulations! You completed the game!')
 
 if __name__ == '__main__':
 
@@ -50,7 +84,10 @@ if __name__ == '__main__':
 
     # Start game or check player stats
     if option:
-        current_player = Player(input('Enter your name:\n'))
+        if int(input('\n1: New Player.\n2: I have an ID.')):
+            current_player = Player(input('\nEnter your name:\n'),'players.db')
+            current_player.save_player()
+            current_player._show_id()
 
         print(f'\nHello {current_player.name}.\n\nThese are the prizes that you can get:\n')
 
