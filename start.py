@@ -8,7 +8,7 @@ import time
 
 prizes = [100,200,400,800,1600]
 
-def start_game(prizes):
+def start_game(prizes,current_player):
     questions = Question('contest.db')
     options = Options('contest.db')
     
@@ -32,11 +32,11 @@ def start_game(prizes):
             break
         elif options.check_answer(player_answer):
             award(category,prizes)
+            completed(category,prizes)
             continue
         else:
             endgame(category)
             break
-    completed(prizes)
 
 def desist(category,prizes):
     if category < 2:
@@ -59,9 +59,9 @@ def endgame(category):
     current_player.save_stats()
     print('Wrong answer. Game Over.')
 
-def completed(prizes):
-    current_player._set_prize(prizes(4))
-    current_player._set_rank(5)
+def completed(category,prizes):
+    if category < 5:
+        return
     current_player.save_stats()
     print('Congratulations! You completed the game!')
 
@@ -85,7 +85,7 @@ if __name__ == '__main__':
     # Start game or check player stats
     if option:
         if int(input('\n1: New Player.\n2: I have an ID.')):
-            current_player = Player(input('\nEnter your name:\n'),'players.db')
+            current_player = Player(input('\nEnter your name:\n'))
             current_player.save_player()
             current_player._show_id()
 
