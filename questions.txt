@@ -1,0 +1,25 @@
+A person with well-developed abdominal muscles is said to have a what?,1
+One-Pack,0
+Six-Pack,1
+12-Pack,0
+Family-Pack,0
+What notable part of our nation's topography accounts for roughly 20 percent of the fresh water on Earth?,2
+Death Valley,0
+Grand Canyon,0
+The Great Lakes,1
+Mark Zuckerberg's hot tub,0
+What design pattern is featured on a traditional Scottish kilt?,3
+Plaid,1
+Flowers,0
+Polka Dots,0
+Pinstripes,0
+The ancient Greek Thespis was most noted for his work in what field?,4
+Politics,0
+Sculpture,0
+Acting,1
+Athletics,0
+Which of the following men does not have a chemical element named for him?,5
+Albert Einstein,0
+Niels Bohr,0
+Isaac Newton,1
+Enrico Fermi,0

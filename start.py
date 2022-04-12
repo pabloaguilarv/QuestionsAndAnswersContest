@@ -9,8 +9,8 @@ import time
 prizes = [100,200,400,800,1600]
 
 def start_game(prizes,current_player):
-    questions = Question('contest.db')
-    options = Options('contest.db')
+    questions = Question('models/contest.db')
+    options = Options('models/contest.db')
     
     for category in range(1,6):
         questions.get_questions(category)

@@ -13,6 +13,7 @@ class Player(BaseModel):
         self._id = self.cursor.lastrowid
         # self.execute('select * from players order by id desc')
         # self._id = self.fetchone()[0]
+        self.commit()
         
 
     def _show_id(self):
@@ -20,7 +21,7 @@ class Player(BaseModel):
         
 
     def get_stats(self,id):
-        self.execute('select * from players where id = ?', (id,))
+        self.execute('select * from players where id = ?',(id,))
         stats = self.fetchone()
         self.name,self.max_rank,self.max_prize = stats[1],stats[2],stats[3]
 
@@ -30,13 +31,15 @@ class Player(BaseModel):
 
 
     def save_stats(self):
-        self.execute('select * from players where id = ?',(self._id))
+        self.execute('select * from players where id = ?',(self._id,))
         stats = self.fetchone()
-        if stats[2]< self._rank: #Compare max rank achieved
-            self.execute('update players set max_rank = ? where id = ?',(self._rank, self._id))
-        if stats[3] < self._prize: #Compare max prize achieved
-            self.execute('update players set max_prize = ? where id = ?',(self._prize, self._id))
 
+        if stats[2] is None or stats[2] < self._rank: #Compare max rank achieved
+            self.execute('update players set max_rank = ? where id = ?',(self._rank, self._id))
+
+        if stats[3] is None or stats[3] < self._prize: #Compare max prize achieved
+            self.execute('update players set max_prize = ? where id = ?',(self._prize, self._id))
+        self.commit()
 
     'SHOULD I PUT SET RANK AND PRIZE TOGETHER?'
     def _set_rank(self,rank):

@@ -5,7 +5,7 @@ import random
 
 class Question(BaseModel):
     def __init__(self,database):
-        BaseModel.__init__(database)
+        BaseModel.__init__(self,database)
 
 
     def get_questions(self,category):
