@@ -11,7 +11,6 @@ class Question(BaseModel):
     def get(self,category):
         self.execute('select * from questions where category_id = ?', (category,))
         self.questions = self.fetchAll()
-        self.close()
     
 
     def get_random(self):

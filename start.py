@@ -10,6 +10,7 @@ import time
 prizes = [100,200,400,800,1600]
 
 def clear_screen():
+    
     os.system('cls')
 
 def start_game(prizes,current_player):

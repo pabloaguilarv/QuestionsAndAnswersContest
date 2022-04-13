@@ -12,7 +12,6 @@ class Options(BaseModel):
     def get(self,question_id):
         self.execute('select * from options where question_id = ?', (question_id,))
         self.options = dict(zip(letters,self.fetchAll()))
-        self.close()
     
 
     def show(self):
