@@ -84,8 +84,11 @@ ipython_config.py
 # pyenv
 .python-version
 
-#vscode
+# debugging files
 .vscode
+
+# test files
+test.py
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
