@@ -11,6 +11,7 @@ class Player(BaseModel):
     def save_player(self):
         self.execute('insert into players (name) values(?)', (self.name,))
         self._id = self.cursor.lastrowid
+        self.commit()
     
     
     def get_player(self):
@@ -46,6 +47,8 @@ class Player(BaseModel):
 
         if stats[3] is None or stats[3] < self._prize: #Compare max prize achieved
             self.execute('update players set max_prize = ? where id = ?',(self._prize, self._id))
+            
+        self.commit()
 
 
     def _set_rank(self,rank):
