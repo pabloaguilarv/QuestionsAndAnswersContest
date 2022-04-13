@@ -11,7 +11,7 @@ class Player(BaseModel):
     def save_player(self):
         self.execute('insert into players (name) values(?)', (self.name,))
         self._id = self.cursor.lastrowid
-        self.commit()
+        self.close()
     
     
     def get_player(self):
@@ -20,6 +20,7 @@ class Player(BaseModel):
             return
         print('Player is already in database. Start again and enter your ID.')
         return exit()
+        self.close()
 
     def _show_id(self):
         print(f'Please, save your ID to check your stats later: {self._id}')
@@ -29,6 +30,7 @@ class Player(BaseModel):
         self.execute('select * from players where id = ?',(self._id,))
         stats = self.fetchOne()
         self.name,self.max_rank,self.max_prize = stats[1],stats[2],stats[3]
+        self.close()
 
 
     def show_stats(self):
@@ -47,7 +49,7 @@ class Player(BaseModel):
 
         if stats[3] is None or stats[3] < self._prize: #Compare max prize achieved
             self.execute('update players set max_prize = ? where id = ?',(self._prize, self._id))
-        self.commit()
+        self.close()
 
 
     def _set_rank(self,rank):
@@ -75,7 +77,5 @@ class AlreadyPlayer(Player):
             print('No player found with the given ID.')
             return exit()
         self.name = self.name[0]
-    
-
-    def save_player(self):
-        pass    
+        self.close()
+     

@@ -19,28 +19,31 @@ def start_game(prizes,current_player):
     round = Round(prizes,current_player)
     
     for category in range(1,6):
-        questions.get_questions(category)
+        questions.get(category)
+        questions.get_random()
+        options.get(questions.pass_id())
 
         while True:
-            round.show_round(category)
-            questions.show_random_question()
-            options.get_options(questions.pass_id())
-            options.show_options()
+            round.show(category)
+            round.show_round_prize(category)
+            questions.show_random()
+            options.show()
 
-            player_answer = input('\nEnter your answer (Leave blank to end game with current prize): ').upper()
+            player_answer = input('\nEnter your answer (Enter E to exit with current prize): ').upper()
 
-            if player_answer not in ['A','B','C','D','']:
+            if player_answer not in ['A','B','C','D','E']:
                 clear_screen()
                 print('\n\033[1;31;40mSelect a valid option.\033[0m')
             else:
                 break
         
-        if player_answer == '':
+        if player_answer == 'E':
             round.desist(category)
             break
         elif options.check_answer(player_answer):
             clear_screen()
 
+            round.show_answer(options,player_answer)
             round.award(category)
             current_player.show_score()
             round.completed(category)
@@ -61,13 +64,13 @@ if __name__ == '__main__':
 
     # Ensure the right input
     while True:
-        try: first_option = int(input('\n1: Start game.\n2: Check player stats.\nOption: '))
+        try: first_option = int(input('\n1: Start game.\n2: Check player stats.\n3. Exit.\nOption: '))
         except:
             clear_screen()
             print('\n\033[1;31;40mPlease enter a valid option.\033[0m')
             continue
 
-        if first_option not in [1,2]:
+        if first_option not in [1,2,3]:
             clear_screen()
             print('\n\033[1;31;40mPlease enter a valid option.\033[0m')
         else:
@@ -79,13 +82,13 @@ if __name__ == '__main__':
     if first_option == 1:
 
         while True:
-            try: second_option = int(input('\nStart game.\n\n1: New Player.\n2: I have an ID.\nOption: '))
+            try: second_option = int(input('\nStart game.\n\n1: New Player.\n2: I have an ID.\n3: Exit.\nOption: '))
             except:
                 clear_screen()
                 print('\n\033[1;31;40mPlease enter a valid option.\033[0m')
                 continue
             
-            if second_option not in [1,2]:
+            if second_option not in [1,2,3]:
                 clear_screen()
                 print('\n\033[1;31;40mPlease enter a valid option.\033[0m')
             else:
@@ -96,10 +99,14 @@ if __name__ == '__main__':
             current_player.get_player()
             current_player.save_player()
             current_player._show_id()
+            time.sleep(5); 'Allow player to see ID.'
 
-        else:
+        if second_option == 2:
             current_player = AlreadyPlayer(input('\nEnter your ID: '))
             current_player.get_player()
+        
+        if second_option == 3:
+            exit()
 
         clear_screen()
 
@@ -107,7 +114,7 @@ if __name__ == '__main__':
 
         pre_round = Round(prizes,current_player).show_prizes()
 
-        time.sleep(6)
+        time.sleep(5)
         clear_screen()
         start_game(prizes,current_player)
 
@@ -116,3 +123,6 @@ if __name__ == '__main__':
         current_player.get_player()
         current_player.get_stats()
         current_player.show_stats()
+    
+    if first_option == 3:
+        exit()

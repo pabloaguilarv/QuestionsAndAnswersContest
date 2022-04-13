@@ -35,7 +35,7 @@ class Round():
             return
         self.player.save_stats()
         print('Congratulations! You completed the game!')
-        self.player.show_score()
+        print(f'You won ${self.player._prize: ,.0f} and your highest rank is now {self.player._rank}!')
 
 
     def show_prizes(self):
@@ -43,6 +43,12 @@ class Round():
             print(f'Rank {index+1}: ${prize: ,.0f} USD')
         print('\nStarting Round 1...')
 
+    def show_round_prize(self,category):
+        print(f'For ${self.prizes[category-1]: ,.0f} USD')
+
     
-    def show_round(self,category):
+    def show(self,category):
         print(f'Round {category}')
+
+    def show_answer(self,options,player_answer):
+        print(f'{player_answer}: {options.options[player_answer][1]}')

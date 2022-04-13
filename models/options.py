@@ -9,12 +9,13 @@ class Options(BaseModel):
         BaseModel.__init__(self,database)
 
 
-    def get_options(self,question_id):
+    def get(self,question_id):
         self.execute('select * from options where question_id = ?', (question_id,))
         self.options = dict(zip(letters,self.fetchAll()))
+        self.close()
     
 
-    def show_options(self):
+    def show(self):
         for index,option in self.options.items():
             print(f'{index}: {option[1]}')
     

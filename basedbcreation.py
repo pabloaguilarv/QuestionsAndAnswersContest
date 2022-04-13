@@ -23,11 +23,11 @@ if __name__ == '__main__':
         db.execute('''create table if not exists questions(
         id integer not null primary key autoincrement unique,
         category_id integer not null,
-        statement text not null
+        statement text unique not null
     )''')
         db.execute('''create table if not exists options(
         id integer not null primary key autoincrement unique,
-        option text not null,
+        option text unique not null,
         question_id integer not null,
         is_correct integer not null
     )''')

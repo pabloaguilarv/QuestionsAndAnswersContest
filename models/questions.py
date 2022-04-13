@@ -8,13 +8,17 @@ class Question(BaseModel):
         BaseModel.__init__(self,database)
 
 
-    def get_questions(self,category):
+    def get(self,category):
         self.execute('select * from questions where category_id = ?', (category,))
         self.questions = self.fetchAll()
+        self.close()
     
 
-    def show_random_question(self):
+    def get_random(self):
         self.round_question = random.choice(self.questions)
+
+
+    def show_random(self):
         print('\n'+self.round_question[2])
 
 

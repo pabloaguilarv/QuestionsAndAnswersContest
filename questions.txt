@@ -23,3 +23,103 @@ Albert Einstein,0
 Niels Bohr,0
 Isaac Newton,1
 Enrico Fermi,0
+Which of the following snack foods comes packaged with a "toy surprise"?,2
+Cracker Jack,1
+Fiddle Faddle,0
+Munchos,0
+U-bet chocolate syrup,0
+If you are much better at something than another person it is often said that they "can't hold a" that to you?,3
+Match,0
+Candle,1
+Blowtorch,0
+Bonfire,0
+A citizen who is undecided in a closely contested election is called what?,3
+Monkey bars voter,0
+Swing voter,1
+Slide voter,0
+Sandbox voter,0
+According to a popular saying if you feel something deeply you feel it "from the bottom of your" what?,1
+Heart,1
+Stomach,0
+Bottom,0
+Shoes,0
+What is the term for the platform where a rocket sits as it begins its journey into space?,2
+Notepad,0
+Mouse pad,0
+Launch pad,1
+Bachelor pad,0
+Which of these words is a common slang term for an error in a computer program?,1
+Mouse,0
+Gates,0
+Bug,1
+Rice,0
+According to a well-known expression a wealthy person is said to live "high off the" what?,4
+Honey,0
+Hog,1
+Hippopotamus,0
+Government,0
+Which of these subjects is taught at a graduate school informally known as "B school"?,4
+Bible studies,0
+Business,1
+Biology,0
+Basketball,0
+If an issue is yet to be decided it is said to be "hanging in the" what?,3
+Clouds,0
+Closet,0
+Trees,0
+Balance,1
+Which of these parts of a house shares its name with a viewing area on a computer screen?,1
+Window,1
+Basement,0
+Wall,0
+Roof,0
+A 5-quart pot filled with rapidly boiling water is commonly recommended for cooking which of the following?,3
+Loaf of bread,0
+Pound of pasta,1
+T-bone steak,0
+Hansel and Gretel,0
+What nickname is the movie star and pro wrestler Dwayne Johnson known by?,1
+Slab,0
+Boulder,0
+Cobblestone,0
+Rock,1
+Which word is normally used to describe animals at risk of extinction?,2
+Jeopardized,0
+Menaced,0
+Endangered,1
+Imperiled,0
+Which plant is a national symbol of Ireland?,4
+Rose,0
+Thistle,0
+Leek,0
+Shamrock,1
+According to the proverb "Early to bed and early to rise" makes you "healthy wealthy and" what?,2
+Wise,1
+Boring,0
+Brave,0
+Stealthy,0
+Which insect shorted out an early supercomputer and inspired the term "computer bug"?,4
+Moth,1
+Roach,0
+Fly,0
+Japanese beetle,0
+Which of the following landlocked countries is entirely contained within another country?,5
+Lesotho,1
+Burkina Faso,0
+Mongolia,0
+Luxembourg,0
+In the children's book series where is Paddington Bear originally from?,5
+India,0
+Peru,1
+Canada,0
+Iceland,0
+Who is credited with inventing the first mass-produced helicopter?,5
+Igor Sikorsky,1
+Elmer Sperry,0
+Ferdinand von Zeppelin,0
+Gottlieb Daimler,0
+What letter must appear at the beginning of the registration number of all non-military aircraft in the U.S.?,5
+N,1
+A,0
+U,0
+L,0
