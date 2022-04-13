@@ -23,7 +23,7 @@ This program was interpreted/tested on Windows 10 using python3 (3.7.3)
 ## Installation
 * Close this repository: "git clone https://github.com/pabloaguilarv/QuestionsAndAnswersContest"
 * Make sure the base contest.db is in models. "cd models".
-* In the main folder where start.py is located, run "python start.py".
+* In the main folder where start.py is located, run "python3 start.py".
 
 ## File Descriptions
 [start.py](start.py) - Is the main file for the entire program. Once running, in-game options will guide the player.
@@ -58,7 +58,7 @@ option(be careful to avoid commas in this text),is_correct.
 
 ## Examples of use
 ```
->python start.py
+>python3 start.py
 Welcome to the Contest
 Select one.
 
