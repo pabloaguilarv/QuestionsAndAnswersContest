@@ -4,14 +4,17 @@ from models.players import AlreadyPlayer, Player
 from models.questions import Question
 from models.options import Options
 from models.round import Round
-import os
+from os import system,name
 import time
 
 prizes = [100,200,400,800,1600]
 
 def clear_screen():
-    
-    os.system('cls')
+
+    if name == 'nt':
+        system('cls')
+    else:
+        system('clean')
 
 def start_game(prizes,current_player):
     questions = Question('models/contest.db')
@@ -57,7 +60,7 @@ def start_game(prizes,current_player):
 
 if __name__ == '__main__':
 
-    os.system('python basedbcreation.py')
+    system('python basedbcreation.py')
     clear_screen()
 
     print('\nWelcome to the Contest\nSelect one.')
