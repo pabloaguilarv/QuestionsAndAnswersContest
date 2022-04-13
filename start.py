@@ -1,6 +1,5 @@
 # Main file for Questions and Answer Contest
 
-from http.client import CONTINUE
 from models.players import AlreadyPlayer, Player
 from models.questions import Question
 from models.options import Options
