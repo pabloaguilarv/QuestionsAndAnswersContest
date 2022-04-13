@@ -1,6 +1,6 @@
 # Questions And Answers Contest
 
-This program provides a system to let players answer questions with multiple difficulties. It allows the use of the base questionaire or add your own custom set of questions (up to 25 questions, 5 per rank). Also stores the performance of each player with the prizes won and best streak.
+This program provides a system to let players answer questions with multiple difficulties. It allows the use of the base questionaire or add your own custom set of questions. Also stores the performance of each player with the prizes won and best streak.
 
 ![Game_Model](https://user-images.githubusercontent.com/96447338/163114327-6cab1a21-61e3-4583-a581-7da2c7c56223.png)
 
