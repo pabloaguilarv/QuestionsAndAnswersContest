@@ -32,11 +32,11 @@ class BaseModel:
         self._cursor.executescript(sql, params or ())
     
 
-    def fetchone(self):
+    def fetchOne(self):
         return self._cursor.fetchone()
     
 
-    def fetchall(self):
+    def fetchAll(self):
         return self._cursor.fetchall()
 
 

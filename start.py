@@ -1,97 +1,118 @@
 # Main file for Questions and Answer Contest
 
-from models.players import Player
+from http.client import CONTINUE
+from models.players import AlreadyPlayer, Player
 from models.questions import Question
-from models.base_model import BaseModel as DB
 from models.options import Options
+from models.round import Round
+import os
 import time
 
 prizes = [100,200,400,800,1600]
 
+def clear_screen():
+    os.system('cls')
+
 def start_game(prizes,current_player):
     questions = Question('models/contest.db')
     options = Options('models/contest.db')
+    round = Round(prizes,current_player)
     
     for category in range(1,6):
         questions.get_questions(category)
-        questions.show_random_question()
-        options.get_options(questions.pass_id())
 
         while True:
+            round.show_round(category)
+            questions.show_random_question()
+            options.get_options(questions.pass_id())
             options.show_options()
-            player_answer = input('Enter your answer: ')
+
+            player_answer = input('\nEnter your answer (Leave blank to end game with current prize): ').upper()
 
             if player_answer not in ['A','B','C','D','']:
-                print('\nSelect a valid option.')
+                clear_screen()
+                print('\n\033[1;31;40mSelect a valid option.\033[0m')
             else:
                 break
         
-        'CONSIDER THE ROUND OBJECT TO HANDLE THE ANSWER SITUATIONS'
         if player_answer == '':
-            desist(category,prizes)
+            round.desist(category)
             break
         elif options.check_answer(player_answer):
-            award(category,prizes)
-            completed(category,prizes)
+            clear_screen()
+
+            round.award(category)
+            current_player.show_score()
+            round.completed(category)
+
+            time.sleep(3); 'Allow some time before next question.'
             continue
         else:
-            endgame(category)
+            round.endgame(category)
             break
 
-def desist(category,prizes):
-    if category < 2:
-        return
-    current_player._set_prize(prizes[category-2])
-    current_player._set_rank(category-1)
-    current_player.save_stats()
-    print('Exiting game.')
-
-
-def award(category,prizes):
-    current_player._set_prize(prizes[category-1])
-    current_player._set_rank(category)
-    print('Correct!')
-
-
-def endgame(category):
-    current_player._set_prize(0)
-    current_player._set_rank(category-1)
-    current_player.save_stats()
-    print('Wrong answer. Game Over.')
-
-def completed(category,prizes):
-    if category < 5:
-        return
-    current_player.save_stats()
-    print('Congratulations! You completed the game!')
 
 if __name__ == '__main__':
 
-    print('\nWelcome to the Contest\nSelect an option:')
+    os.system('python basedbcreation.py')
+    clear_screen()
+
+    print('\nWelcome to the Contest\nSelect one.')
 
     # Ensure the right input
     while True:
-        print('\n1: Start game.\n2: Check player stats.')
-        try: option = int(input())
+        try: first_option = int(input('\n1: Start game.\n2: Check player stats.\nOption: '))
         except:
-            print('\nPlease enter a valid option.')
+            clear_screen()
+            print('\n\033[1;31;40mPlease enter a valid option.\033[0m')
             continue
 
-        if option not in [1,2]:
-            print('\nPlease enter a valid option.')
+        if first_option not in [1,2]:
+            clear_screen()
+            print('\n\033[1;31;40mPlease enter a valid option.\033[0m')
         else:
             break
+    
+    clear_screen()
 
     # Start game or check player stats
-    if option:
-        if int(input('\n1: New Player.\n2: I have an ID.')):
-            current_player = Player(input('\nEnter your name:\n'))
+    if first_option == 1:
+
+        while True:
+            try: second_option = int(input('\nStart game.\n\n1: New Player.\n2: I have an ID.\nOption: '))
+            except:
+                clear_screen()
+                print('\n\033[1;31;40mPlease enter a valid option.\033[0m')
+                continue
+            
+            if second_option not in [1,2]:
+                clear_screen()
+                print('\n\033[1;31;40mPlease enter a valid option.\033[0m')
+            else:
+                break
+
+        if second_option == 1: # Create player
+            current_player = Player(input('\nEnter your name: '))
+            current_player.get_player()
             current_player.save_player()
             current_player._show_id()
 
+        else:
+            current_player = AlreadyPlayer(input('\nEnter your ID: '))
+            current_player.get_player()
+
+        clear_screen()
+
         print(f'\nHello {current_player.name}.\n\nThese are the prizes that you can get:\n')
 
-        for index,prize in enumerate(prizes):
-            print(f'Rank {index}: ${prize: ,.0f} USD')
+        pre_round = Round(prizes,current_player).show_prizes()
 
+        time.sleep(6)
+        clear_screen()
         start_game(prizes,current_player)
+
+    if first_option == 2:
+        current_player = AlreadyPlayer(input('\nEnter your ID: '))
+        current_player.get_player()
+        current_player.get_stats()
+        current_player.show_stats()

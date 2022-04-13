@@ -8,13 +8,13 @@ def enter_questions():
 
             for line in file:
                 question = line.rstrip().split(',')
-                db.execute('insert into questions (statement,category_id) values(?,?)',(question[0],question[1]))
+                db.execute('insert or ignore into questions (statement,category_id) values(?,?)',(question[0],question[1]))
                 question_id = db.cursor.lastrowid
 
                 for _ in range(4):
                     line = next(file,"")
                     option = line.rstrip().split(',')
-                    db.execute('insert into options (option,question_id,is_correct) values(?,?,?)',(option[0],question_id,option[-1]))
+                    db.execute('insert or ignore into options (option,question_id,is_correct) values(?,?,?)',(option[0],question_id,option[-1]))
                     
         db.commit()
 

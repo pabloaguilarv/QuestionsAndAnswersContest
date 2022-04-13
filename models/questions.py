@@ -10,7 +10,7 @@ class Question(BaseModel):
 
     def get_questions(self,category):
         self.execute('select * from questions where category_id = ?', (category,))
-        self.questions = self.fetchall()
+        self.questions = self.fetchAll()
     
 
     def show_random_question(self):
